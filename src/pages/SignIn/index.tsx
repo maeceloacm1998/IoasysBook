@@ -3,8 +3,6 @@ import React from 'react';
 import {Header} from '../../components/Header';
 import {Input} from '../../components/Input';
 
-import FontAwesom from 'react-native-vector-icons/FontAwesome';
-
 import {Container, ContainerHeader} from './styles';
 
 import background from '../../assets/background_login.png';
@@ -20,13 +18,12 @@ const SignIn: React.FC = () => {
 
       <Input
         label="Senha"
+        password
         showEnterButton
         handleSubmit={() => {
           console.log('Função de Logar');
         }}
       />
-
-      <FontAwesom name="home" size={25} />
     </Container>
   );
 };
