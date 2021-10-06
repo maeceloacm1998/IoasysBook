@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image} from 'react-native';
 
 import headerWhite from '../../assets/headerWhite.png';
 import headerBlack from '../../assets/headerBlack.png';

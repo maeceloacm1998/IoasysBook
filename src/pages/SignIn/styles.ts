@@ -5,5 +5,8 @@ export const Container = styled.ImageBackground`
   width: 100%;
   padding: 20px;
   justify-content: center;
-  align-items: center;
+`;
+
+export const ContainerHeader = styled.View`
+  margin-bottom: 30px;
 `;
