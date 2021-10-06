@@ -5,6 +5,8 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 
+import ListBooks from '../pages/ListBooks';
+
 import {theme} from '../styles/theme';
 
 const stack = createStackNavigator();
@@ -20,8 +22,9 @@ const App: React.FC = () => {
           backgroundColor: theme.color.white,
         },
         headerShown: false,
-      }}>
-      {/* <stack.Screen name="ListAccounts" component={ListAccounts} /> */}
+      }}
+      initialRouteName="ListBooks">
+      <stack.Screen name="ListBooks" component={ListBooks} />
     </stack.Navigator>
   );
 };
