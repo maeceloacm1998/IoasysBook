@@ -2,10 +2,16 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 
 import {Header} from '../../components/Header';
+import {SearchInput} from '../../components/SearchInput';
+import {BoxSelectBook} from '../../components/BoxSelectBook';
 
 import background from '../../assets/background_listbooks.png';
 
-import {Container} from './styles';
+import {
+  Container,
+  ContainerSearchInput,
+  ContainerFlatListBooks,
+} from './styles';
 
 function ListBooks() {
   return (
@@ -22,6 +28,14 @@ function ListBooks() {
           console.log('Botao de sair');
         }}
       />
+
+      <ContainerSearchInput>
+        <SearchInput label="Procure um livro" />
+      </ContainerSearchInput>
+
+      <ContainerFlatListBooks>
+        <BoxSelectBook />
+      </ContainerFlatListBooks>
     </Container>
   );
 }

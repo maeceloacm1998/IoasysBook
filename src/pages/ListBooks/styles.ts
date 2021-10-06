@@ -9,3 +9,12 @@ export const Container = styled.ImageBackground`
   margin-top: ${barHeight}px;
   padding: 30px 16px;
 `;
+
+export const ContainerSearchInput = styled.View`
+  margin: 25px 0px;
+`;
+
+export const ContainerFlatListBooks = styled.View`
+  flex: 1;
+  margin-top: 10px;
+`;
