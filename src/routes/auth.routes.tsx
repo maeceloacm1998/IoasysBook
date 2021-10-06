@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -12,6 +12,7 @@ const StackRoutes: React.FC = () => {
   return (
     <stack.Navigator
       screenOptions={{
+        headerShown: false,
         cardStyle: {
           backgroundColor: theme.color.white,
         },

@@ -1,15 +1,19 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import fonts from '../../styles/fonts';
+import {ImageBackground, Text, View} from 'react-native';
+
+import {Header} from '../../components/Header';
+import {Input} from '../../components/Input';
 
 import {Container} from './styles';
+import fonts from '../../styles/fonts';
+
+import background from '../../assets/background_login.png';
 
 const SignIn: React.FC = () => {
   return (
-    <Container>
-      <Text style={{fontFamily: fonts.Heebo_regular, fontSize: 30}}>
-        MARCELO
-      </Text>
+    <Container source={background}>
+      <Header colorTheme="white" />
+      <Input />
     </Container>
   );
 };
