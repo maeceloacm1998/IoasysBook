@@ -1,6 +1,7 @@
 export const theme = {
   color: {
     background_input: '#00000067',
+    background_shadow: '#00000067',
     border_black_light: '#00000030',
     color_button: '#B22E6F',
     black: '#333333',

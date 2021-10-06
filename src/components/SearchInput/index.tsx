@@ -4,6 +4,7 @@ import {TouchableOpacity} from 'react-native';
 import IconEvil from 'react-native-vector-icons/EvilIcons';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import {theme} from '../../styles/theme';
+import {ModalOptions} from '../ModalOptions';
 
 import {Container, ContainerInput, TextInputCustom} from './styles';
 
@@ -30,6 +31,8 @@ export function SearchInput({label}: SearchInputProps) {
           size={30}
           color={theme.color.black}
         />
+
+        <ModalOptions />
       </TouchableOpacity>
     </Container>
   );

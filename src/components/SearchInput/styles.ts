@@ -14,8 +14,8 @@ export const Container = styled.View`
 export const ContainerInput = styled.View`
   border: 1px solid ${theme.color.border_black_light};
   height: 48px;
-  width: 80%;
-  padding: 0px 12px;
+  width: 85%;
+  padding: 0 12px;
 
   flex-direction: row;
   justify-content: space-between;
