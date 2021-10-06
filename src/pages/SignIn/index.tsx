@@ -8,7 +8,7 @@ const SignIn: React.FC = () => {
   return (
     <Container>
       <Text style={{fontFamily: fonts.Heebo_regular, fontSize: 30}}>
-        MARCELO Antonio
+        MARCELO
       </Text>
     </Container>
   );
