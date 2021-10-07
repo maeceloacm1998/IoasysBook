@@ -4,8 +4,10 @@ import {Image} from 'react-native';
 import headerWhite from '../../assets/headerWhite.png';
 import headerBlack from '../../assets/headerBlack.png';
 
-import {Container} from './styles';
 import {RoundedButton} from '../RoundedButton';
+
+import {Container} from './styles';
+
 import {theme} from '../../styles/theme';
 
 interface HeaderProps {

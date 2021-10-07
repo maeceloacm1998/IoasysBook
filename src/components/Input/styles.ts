@@ -40,6 +40,6 @@ export const ContainerEnterButton = styled.View`
 `;
 
 export const TextEnterButton = styled.Text`
-  color: ${theme.color.subscription};
+  color: ${theme.color.color_button};
   font-family: ${fonts.Heebo_medium};
 `;

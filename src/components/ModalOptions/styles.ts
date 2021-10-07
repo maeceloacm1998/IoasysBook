@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import {theme} from '../../styles/theme';
 
 export const Background = styled.View`
@@ -19,7 +20,6 @@ export const ContainerModal = styled.View`
 `;
 
 export const ContainerExitButton = styled.View`
-  border: 1px solid red;
   height: 32px;
   width: 100%;
 
