@@ -1,28 +1,18 @@
 import React from 'react';
 
+import SubmitButton, {SubmitButtonProps} from '../SubmitButton';
+
 import {theme} from '../../styles/theme';
 
-import {
-  Container,
-  InputFlat,
-  EnterButton,
-  ContainerEnterButton,
-  TextEnterButton,
-} from './styles';
+import {Container, InputFlat} from './styles';
 
-interface InputProps {
+interface InputProps extends SubmitButtonProps {
   password?: boolean;
   showEnterButton?: boolean;
-  handleSubmit?(): void;
   label: string;
 }
 
-export function Input({
-  label,
-  handleSubmit,
-  password,
-  showEnterButton,
-}: InputProps) {
+export function Input({label, password, showEnterButton, ...rest}: InputProps) {
   return (
     <Container flexDirection={showEnterButton ? true : false}>
       <InputFlat
@@ -39,19 +29,7 @@ export function Input({
           },
         }}
       />
-      {showEnterButton && (
-        <EnterButton
-          activeOpacity={0.7}
-          onPress={() => {
-            if (handleSubmit !== undefined) {
-              handleSubmit();
-            }
-          }}>
-          <ContainerEnterButton>
-            <TextEnterButton> Entrar </TextEnterButton>
-          </ContainerEnterButton>
-        </EnterButton>
-      )}
+      {showEnterButton && <SubmitButton {...rest} />}
     </Container>
   );
 }

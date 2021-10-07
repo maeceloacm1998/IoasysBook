@@ -3,12 +3,21 @@ import {Modal, ModalBaseProps, ScrollView} from 'react-native';
 
 import {RoundedButton} from '../RoundedButton';
 import {SelectOptions, SelectOptionProps} from '../SelectOptions';
+import SubmitButton, {SubmitButtonProps} from '../SubmitButton';
 
-import {Background, ContainerModal, ContainerExitButton} from './styles';
+import {
+  Background,
+  ContainerModal,
+  ContainerExitButton,
+  ContainerFilterButton,
+} from './styles';
 
 import {theme} from '../../styles/theme';
 
-interface ModalOptionsProps extends ModalBaseProps, SelectOptionProps {
+interface ModalOptionsProps
+  extends ModalBaseProps,
+    SelectOptionProps,
+    SubmitButtonProps {
   handleExitModal: boolean;
 }
 
@@ -74,6 +83,10 @@ export function ModalOptions({handleExitModal, ...rest}: ModalOptionsProps) {
               arrayItemSelected={itensSelected}
             />
           </ScrollView>
+
+          <ContainerFilterButton>
+            <SubmitButton {...rest} borderButton />
+          </ContainerFilterButton>
         </ContainerModal>
       </Background>
     </Modal>

@@ -26,3 +26,8 @@ export const ContainerExitButton = styled.View`
   justify-content: center;
   align-items: flex-end;
 `;
+
+export const ContainerFilterButton = styled.View`
+  height: 65px;
+  width: 100%;
+`;

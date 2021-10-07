@@ -32,7 +32,12 @@ export function SearchInput({label}: SearchInputProps) {
           color={theme.color.black}
         />
 
-        <ModalOptions />
+        <ModalOptions
+          handleSubmit={() => {
+            console.log('dale dale');
+          }}
+          handleExitModal={true}
+        />
       </TouchableOpacity>
     </Container>
   );
