@@ -10,9 +10,18 @@ interface InputProps extends SubmitButtonProps {
   password?: boolean;
   showEnterButton?: boolean;
   label: string;
+  value: string;
+  onChangeText: (text: string) => void;
 }
 
-export function Input({label, password, showEnterButton, ...rest}: InputProps) {
+export function Input({
+  label,
+  password,
+  showEnterButton,
+  onChangeText,
+  value,
+  ...rest
+}: InputProps) {
   return (
     <Container flexDirection={showEnterButton ? true : false}>
       <InputFlat
@@ -21,6 +30,10 @@ export function Input({label, password, showEnterButton, ...rest}: InputProps) {
         autoCorrect={false}
         secureTextEntry={password ? true : false}
         style={{width: showEnterButton ? '70%' : '100%'}}
+        onChangeText={text => {
+          onChangeText(text);
+        }}
+        value={value}
         theme={{
           colors: {
             primary: theme.color.white,

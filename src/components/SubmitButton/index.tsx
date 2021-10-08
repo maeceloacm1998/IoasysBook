@@ -13,7 +13,6 @@ function SubmitButton({handleSubmit, borderButton}: SubmitButtonProps) {
     <EnterButton
       activeOpacity={0.7}
       onPress={() => {
-        console.log(handleSubmit);
         if (handleSubmit !== undefined) {
           handleSubmit();
         }

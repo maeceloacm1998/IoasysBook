@@ -17,6 +17,7 @@
     "@types/styled-components-react-native": "^5.1.1",
     "axios": "^0.22.0",
     "react": "17.0.2",
+    "react-hook-form": "^7.17.2",
     "react-native": "0.66.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-neomorph-shadows": "^1.1.2",

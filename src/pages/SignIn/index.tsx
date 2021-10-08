@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import {AxiosError} from 'axios';
+import {useForm, Controller} from 'react-hook-form';
 
 import {Header} from '../../components/Header';
 import {Input} from '../../components/Input';
@@ -19,18 +20,26 @@ interface MessageErrorType {
   message: string;
 }
 
+interface UserTypes {
+  email: string;
+  password: string;
+}
+
 const SignIn: React.FC = () => {
+  const {control, handleSubmit} = useForm();
+
   const [errorText, setErrorText] = useState<string | null>(null);
 
-  async function handleSubmit() {
+  async function onSubmit(data: UserTypes) {
+    setErrorText('');
+    console.log(data);
+
     try {
       const get = await api.post('auth/sign-in', {
-        email: 'desafio@ioas.com.br',
-        password: '12341234',
+        email: data.email,
+        password: data.password,
       });
-
       console.log('o que retorna no get', get);
-
       // const post = await api.get('books?page=1&amount=25&category=biographies', {
       //   headers: {
       //     Authorization: `Bearer ${get.headers.authorization}`,
@@ -38,7 +47,6 @@ const SignIn: React.FC = () => {
       // });
     } catch (error) {
       const err = error as AxiosError;
-
       hadleError(err);
     }
   }
@@ -57,17 +65,33 @@ const SignIn: React.FC = () => {
         <Header colorTheme="white" />
       </ContainerHeader>
 
-      <Input label="Email" />
-
-      <Input
-        label="Senha"
-        password
-        showEnterButton
-        handleSubmit={() => {
-          console.log('Função de Logar');
-          handleSubmit();
-        }}
+      <Controller
+        control={control}
+        render={({field: {onChange, value}}) => (
+          <Input label="Email" onChangeText={onChange} value={value} />
+        )}
+        defaultValue=""
+        name="email"
+        rules={{required: true, minLength: 6}}
       />
+
+      <Controller
+        control={control}
+        render={({field: {onChange, value}}) => (
+          <Input
+            label="Senha"
+            onChangeText={onChange}
+            value={value}
+            password
+            showEnterButton
+            handleSubmit={handleSubmit(onSubmit)}
+          />
+        )}
+        defaultValue=""
+        name="password"
+        rules={{required: true, minLength: 6}}
+      />
+
       {errorText !== null && <TagError>{errorText}</TagError>}
     </Container>
   );
