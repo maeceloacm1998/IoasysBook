@@ -39,7 +39,6 @@ const SignIn: React.FC = () => {
         email: data.email,
         password: data.password,
       });
-      console.log('o que retorna no get', get);
       // const post = await api.get('books?page=1&amount=25&category=biographies', {
       //   headers: {
       //     Authorization: `Bearer ${get.headers.authorization}`,
