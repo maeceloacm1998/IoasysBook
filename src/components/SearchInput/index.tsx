@@ -36,7 +36,7 @@ export function SearchInput({label}: SearchInputProps) {
           handleSubmit={() => {
             console.log('dale dale');
           }}
-          handleExitModal={true}
+          handleExitModal={false}
         />
       </TouchableOpacity>
     </Container>

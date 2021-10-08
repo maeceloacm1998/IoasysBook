@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/stack';
 
 import ListBooks from '../pages/ListBooks';
+import {ViewBooks} from '../pages/ViewBooks';
 
 import {theme} from '../styles/theme';
 
@@ -24,7 +25,8 @@ const App: React.FC = () => {
         headerShown: false,
       }}
       initialRouteName="ListBooks">
-      <stack.Screen name="ListBooks" component={ListBooks} />
+      {/* <stack.Screen name="ListBooks" component={ListBooks} /> */}
+      <stack.Screen name="ViewBooks" component={ViewBooks} />
     </stack.Navigator>
   );
 };

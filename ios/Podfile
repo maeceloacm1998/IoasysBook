@@ -14,6 +14,8 @@ target 'IoasysProject' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'ReactNativeART', :path => '../node_modules/@react-native-community/art'
+
   target 'IoasysProjectTests' do
     inherit! :complete
     # Pods for testing

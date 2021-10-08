@@ -9,5 +9,6 @@ export const theme = {
     gray: '#999999',
     white: '#FFFFFF',
     shadow: '#55105f47',
+    shadow_black_light: '#00000010',
   },
 };
