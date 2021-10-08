@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Image} from 'react-native';
-
-import {Text} from 'react-native-paper';
+import {ScrollView} from 'react-native';
 
 import {RoundedButton} from '../../components/RoundedButton';
+import {BoxShadow} from '../../components/BoxShadow';
+import Informations from './Informations';
+import {Reviwn} from './Reviwn';
 
 import book from '../../assets/book.png';
 
@@ -14,8 +15,9 @@ import {
   ContainerExitButton,
   ContainerAllDataBooks,
   ImageBook,
+  TitleBook,
+  AuthorBook,
 } from './styles';
-import {BoxShadow} from '../../components/BoxShadow';
 
 export function ViewBooks() {
   return (
@@ -31,14 +33,23 @@ export function ViewBooks() {
         />
       </ContainerExitButton>
 
-      <ContainerAllDataBooks>
-        <BoxShadow
-          color={theme.color.shadow_black_light}
-          width={295}
-          height={411}>
-          <ImageBook source={book} />
-        </BoxShadow>
-      </ContainerAllDataBooks>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <ContainerAllDataBooks>
+          <BoxShadow
+            color={theme.color.shadow_black_light}
+            width={295}
+            height={411}>
+            <ImageBook source={book} />
+          </BoxShadow>
+
+          <TitleBook>Change By Design Second line exa...</TitleBook>
+          <AuthorBook>Tim Brown, Julie Zhuo, Fried Maximiilian</AuthorBook>
+
+          <Informations />
+
+          <Reviwn />
+        </ContainerAllDataBooks>
+      </ScrollView>
     </Container>
   );
 }
