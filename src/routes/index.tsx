@@ -16,7 +16,7 @@ const Routes: React.FC = () => {
         translucent
       />
 
-      <AppRoutes />
+      <AuthRoutes />
     </NavigationContainer>
   );
 };
