@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 
 import book from '../../assets/book.png';
 
@@ -12,17 +13,36 @@ import {
   SubscriptionBook,
 } from './styles';
 
-export function BoxSelectBook() {
+interface BoxSelectBookProps {
+  data: BooksData;
+}
+
+export interface BooksData {
+  id: string;
+  title: string;
+  description: string;
+  authors: string[];
+  pageCount: string;
+  category: string;
+  imageUrl: string;
+  isbn10: string;
+  isbn13: string;
+  language: string;
+  publisher: string;
+  published: string;
+}
+
+export function BoxSelectBook({data}: BoxSelectBookProps) {
   return (
     <ContainerBox>
       <PricipalContainer>
-        <ImageBook source={book} />
+        <ImageBook source={{uri: data.imageUrl}} />
         <ContainerAllData>
-          <TitleBook>Crossing the Chasm</TitleBook>
-          <AuthorBook>Geoffrey A. Moore</AuthorBook>
-          <SubscriptionBook>150 páginas</SubscriptionBook>
-          <SubscriptionBook>Editora Loyola</SubscriptionBook>
-          <SubscriptionBook>Publicado em 2020</SubscriptionBook>
+          <TitleBook>{data.title}</TitleBook>
+          <AuthorBook>{data.authors + `,`}</AuthorBook>
+          <SubscriptionBook>{data.pageCount} páginas</SubscriptionBook>
+          <SubscriptionBook>Editora {data.publisher}</SubscriptionBook>
+          <SubscriptionBook>{data.published}</SubscriptionBook>
         </ContainerAllData>
       </PricipalContainer>
     </ContainerBox>

@@ -4,7 +4,6 @@ import fonts from '../../styles/fonts';
 import {theme} from '../../styles/theme';
 
 export const ContainerBox = styled.View`
-  height: 160px;
   width: 100%;
   padding: 15px;
 
@@ -15,6 +14,10 @@ export const ContainerBox = styled.View`
 `;
 
 export const PricipalContainer = styled.View`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
   flex-direction: row;
 `;
 
@@ -24,7 +27,8 @@ export const ImageBook = styled.Image`
 `;
 
 export const ContainerAllData = styled.View`
-  margin-left: 16px;
+  width: 70%;
+  margin-left: 10px;
 `;
 
 export const TitleBook = styled.Text`

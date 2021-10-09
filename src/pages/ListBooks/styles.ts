@@ -15,6 +15,6 @@ export const ContainerSearchInput = styled.View`
 `;
 
 export const ContainerFlatListBooks = styled.View`
-  flex: 1;
   margin-top: 10px;
+  width: 100%;
 `;
