@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {api} from '../../services/api';
@@ -12,10 +6,12 @@ import {AxiosError, AxiosResponse} from 'axios';
 
 interface AuthContextData {
   login(credentials: SignInCredencials): Promise<void>;
+  logout(): void;
   error: string | null;
   loading: boolean;
   user: User;
   authorization: string | null;
+  reflashToken: string | null;
 }
 
 export interface SignInCredencials {
@@ -25,7 +21,8 @@ export interface SignInCredencials {
 
 interface AuthState {
   user: User;
-  Authorization: string | null;
+  authorization: string;
+  reflashToken: any;
 }
 
 interface User {
@@ -45,7 +42,8 @@ interface MessageErrorType {
 }
 
 const DEFAULT_VALUE: AuthState = {
-  Authorization: null,
+  authorization: '',
+  reflashToken: '',
   user: {
     email: '',
     birthdate: '',
@@ -62,6 +60,47 @@ export const AuthProvider: React.FC = ({children}) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorText, setErrorText] = useState<string | null>(null);
 
+  useEffect(() => {
+    async function regeneratedToken(userData: AuthState) {
+      const responseToken: AxiosResponse = await api.post(
+        'auth/refresh-token',
+        {
+          refreshToken: userData.reflashToken,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userData.authorization}`,
+            'refresh-token': userData.reflashToken,
+          },
+        }
+      );
+
+      const reflashToken = getReflashToken(responseToken.headers);
+
+      const authorization: string = responseToken.headers.authorization;
+
+      const objectData: AuthState = {
+        authorization: authorization,
+        reflashToken: reflashToken,
+        user: userData.user,
+      };
+
+      await AsyncStorage.setItem('@IOASYS:user', JSON.stringify(objectData));
+
+      setData(objectData);
+    }
+
+    async function persistLogin() {
+      const response = await AsyncStorage.getItem('@IOASYS:user');
+
+      if (response !== null) {
+        regeneratedToken(JSON.parse(response));
+      }
+    }
+
+    persistLogin();
+  }, []);
+
   const login = async (users: SignInCredencials) => {
     setErrorText(null);
 
@@ -72,11 +111,15 @@ export const AuthProvider: React.FC = ({children}) => {
         password: users.password,
       });
 
+      const reflashToken = getReflashToken(response.headers);
+
       const {birthdate, email, gender, id, name}: User = response.data;
 
-      const authorization: string = `Bearer ${response.headers.authorization}`;
-      setData({
-        Authorization: authorization,
+      const authorization: string = response.headers.authorization;
+
+      const objectData: AuthState = {
+        authorization: authorization,
+        reflashToken: reflashToken,
         user: {
           email: email,
           birthdate: birthdate,
@@ -84,7 +127,11 @@ export const AuthProvider: React.FC = ({children}) => {
           id: id,
           name: name,
         },
-      });
+      };
+
+      await AsyncStorage.setItem('@IOASYS:user', JSON.stringify(objectData));
+
+      setData(objectData);
     } catch (error) {
       const err = error as AxiosError;
       hadleError(err);
@@ -92,6 +139,22 @@ export const AuthProvider: React.FC = ({children}) => {
       setLoading(false);
     }
   };
+
+  function logout() {
+    setData(DEFAULT_VALUE);
+
+    AsyncStorage.clear();
+  }
+
+  function getReflashToken(token: any) {
+    const getValueToken = Object.entries(token);
+
+    const tokenValue = getValueToken.filter(item => {
+      return item[0] === 'refresh-token';
+    });
+
+    return tokenValue[0][1];
+  }
 
   function hadleError(error: AxiosError): void {
     if (error.response?.status) {
@@ -105,8 +168,10 @@ export const AuthProvider: React.FC = ({children}) => {
     <AuthContext.Provider
       value={{
         loading,
+        logout,
         user: data.user,
-        authorization: data.Authorization,
+        authorization: data.authorization,
+        reflashToken: data.reflashToken,
         login,
         error: errorText,
       }}>

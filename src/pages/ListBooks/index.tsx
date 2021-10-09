@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StatusBar} from 'react-native';
 
 import {Header} from '../../components/Header';
@@ -15,7 +15,7 @@ import {
 import {useAuth} from '../../Context/Auth/auth';
 
 function ListBooks() {
-  const {authorization} = useAuth();
+  const {authorization, logout} = useAuth();
 
   return (
     <Container source={background}>
@@ -28,7 +28,7 @@ function ListBooks() {
       <Header
         showButtonExit
         handleSubmit={() => {
-          console.log('Botao de sair');
+          logout();
         }}
       />
 

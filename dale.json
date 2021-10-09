@@ -1,0 +1,105 @@
+ {
+     "config": {
+         "adapter": [Function xhrAdapter],
+         "baseURL": "https://books.ioasys.com.br/api/v1/",
+         "data": "{\"refreshToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1MjgyMzksImlhdCI6MTYzMzgxNjkyODIzOX0.p-SjrmUib5XHdnekgxXQr-PgLHsKycymTF3d_cJOpJo\"}",
+         "headers": {
+             "Accept": "application/json, text/plain, */*",
+             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1MjgyMzksImlhdCI6MTYzMzgwNjEyODIzOX0.20b0AMD_JKp16L1pkoIUjC9RSzG4m_--9U9IF1UI890",
+             "Content-Type": "application/json",
+             "refresh-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1MjgyMzksImlhdCI6MTYzMzgxNjkyODIzOX0.p-SjrmUib5XHdnekgxXQr-PgLHsKycymTF3d_cJOpJo"
+         },
+         "maxBodyLength": -1,
+         "maxContentLength": -1,
+         "method": "post",
+         "timeout": 0,
+         "transformRequest": [
+             [Function transformRequest]
+         ],
+         "transformResponse": [
+             [Function transformResponse]
+         ],
+         "transitional": {
+             "clarifyTimeoutError": false,
+             "forcedJSONParsing": true,
+             "silentJSONParsing": true
+         },
+         "url": "auth/refresh-token",
+         "validateStatus": [Function validateStatus],
+         "xsrfCookieName": "XSRF-TOKEN",
+         "xsrfHeaderName": "X-XSRF-TOKEN"
+     },
+     "data": "",
+     "headers": {
+         "access-control-allow-origin": "*",
+         "access-control-expose-headers": "authorization,refresh-token",
+         "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1NjA3NzUsImlhdCI6MTYzMzgwNjE2MDc3NX0.MpCR6Mi3p_PccsG2pnABC2eIr4P-LS_LR7KfdZQZJSM",
+         "connection": "keep-alive",
+         "date": "Sat, 09 Oct 2021 18:02:40 GMT",
+         "refresh-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1NjA3NzUsImlhdCI6MTYzMzgxNjk2MDc3NX0.l-5VqBYVAjFU6c0UkWBoqQimrRQeCtG8pZzK6BLd-To",
+         "server": "nginx/1.12.1",
+         "x-powered-by": "Express"
+     },
+     "request": {
+         "DONE": 4,
+         "HEADERS_RECEIVED": 2,
+         "LOADING": 3,
+         "OPENED": 1,
+         "UNSENT": 0,
+         "_aborted": false,
+         "_cachedResponse": undefined,
+         "_hasError": false,
+         "_headers": {
+             "accept": "application/json, text/plain, */*",
+             "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1MjgyMzksImlhdCI6MTYzMzgwNjEyODIzOX0.20b0AMD_JKp16L1pkoIUjC9RSzG4m_--9U9IF1UI890",
+             "content-type": "application/json",
+             "refresh-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1MjgyMzksImlhdCI6MTYzMzgxNjkyODIzOX0.p-SjrmUib5XHdnekgxXQr-PgLHsKycymTF3d_cJOpJo"
+         },
+         "_incrementalEvents": true,
+         "_lowerCaseResponseHeaders": {
+             "access-control-allow-origin": "*",
+             "access-control-expose-headers": "authorization,refresh-token",
+             "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1NjA3NzUsImlhdCI6MTYzMzgwNjE2MDc3NX0.MpCR6Mi3p_PccsG2pnABC2eIr4P-LS_LR7KfdZQZJSM",
+             "connection": "keep-alive",
+             "date": "Sat, 09 Oct 2021 18:02:40 GMT",
+             "refresh-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1NjA3NzUsImlhdCI6MTYzMzgxNjk2MDc3NX0.l-5VqBYVAjFU6c0UkWBoqQimrRQeCtG8pZzK6BLd-To",
+             "server": "nginx/1.12.1",
+             "x-powered-by": "Express"
+         },
+         "_method": "POST",
+         "_perfKey": "network_XMLHttpRequest_1004",
+         "_performanceLogger": {
+             "_closed": false,
+             "_extras": [Object],
+             "_pointExtras": [Object],
+             "_points": [Object],
+             "_timespans": [Object]
+         },
+         "_requestId": null,
+         "_response": "",
+         "_responseType": "",
+         "_sent": true,
+         "_subscriptions": [],
+         "_timedOut": false,
+         "_trackingName": 1004,
+         "_url": "https://books.ioasys.com.br/api/v1/auth/refresh-token",
+         "readyState": 4,
+         "responseHeaders": {
+             "Access-Control-Allow-Origin": "*",
+             "Access-Control-Expose-Headers": "authorization,refresh-token",
+             "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1NjA3NzUsImlhdCI6MTYzMzgwNjE2MDc3NX0.MpCR6Mi3p_PccsG2pnABC2eIr4P-LS_LR7KfdZQZJSM",
+             "Connection": "keep-alive",
+             "Date": "Sat, 09 Oct 2021 18:02:40 GMT",
+             "Server": "nginx/1.12.1",
+             "X-Powered-By": "Express",
+             "refresh-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzM4MDI1NjA3NzUsImlhdCI6MTYzMzgxNjk2MDc3NX0.l-5VqBYVAjFU6c0UkWBoqQimrRQeCtG8pZzK6BLd-To"
+         },
+         "responseURL": "https://books.ioasys.com.br/api/v1/auth/refresh-token",
+         "status": 204,
+         "timeout": 0,
+         "upload": {},
+         "withCredentials": true
+     },
+     "status": 204,
+     "statusText": undefined
+ }

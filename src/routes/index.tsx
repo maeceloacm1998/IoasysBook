@@ -27,7 +27,7 @@ const Routes: React.FC = () => {
           translucent
         />
       )}
-      {authorization === null ? <AuthRoutes /> : <AppRoutes />}
+      {authorization === '' ? <AuthRoutes /> : <AppRoutes />}
     </NavigationContainer>
   );
 };
