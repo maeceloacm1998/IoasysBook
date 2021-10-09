@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-import {AxiosError} from 'axios';
 import {useForm, Controller} from 'react-hook-form';
 
 import {Header} from '../../components/Header';
@@ -8,54 +7,16 @@ import {Input} from '../../components/Input';
 
 import background from '../../assets/background_login.png';
 
-import {api} from '../../services/api';
+import {useAuth, SignInCredencials} from '../../Context/Auth/auth';
 
 import {Container, ContainerHeader, TagError} from './styles';
 
-interface ErrorType {
-  errors: MessageErrorType;
-}
-
-interface MessageErrorType {
-  message: string;
-}
-
-interface UserTypes {
-  email: string;
-  password: string;
-}
-
 const SignIn: React.FC = () => {
   const {control, handleSubmit} = useForm();
+  const {error, login, loading} = useAuth();
 
-  const [errorText, setErrorText] = useState<string | null>(null);
-
-  async function onSubmit(data: UserTypes) {
-    setErrorText('');
-    console.log(data);
-
-    try {
-      const get = await api.post('auth/sign-in', {
-        email: data.email,
-        password: data.password,
-      });
-      // const post = await api.get('books?page=1&amount=25&category=biographies', {
-      //   headers: {
-      //     Authorization: `Bearer ${get.headers.authorization}`,
-      //   },
-      // });
-    } catch (error) {
-      const err = error as AxiosError;
-      hadleError(err);
-    }
-  }
-
-  function hadleError(error: AxiosError): void {
-    if (error.response?.status) {
-      const err: ErrorType = error.response.data;
-
-      setErrorText(err.errors.message);
-    }
+  async function onSubmit(data: SignInCredencials) {
+    login(data);
   }
 
   return (
@@ -84,6 +45,7 @@ const SignIn: React.FC = () => {
             password
             showEnterButton
             handleSubmit={handleSubmit(onSubmit)}
+            loading={loading}
           />
         )}
         defaultValue=""
@@ -91,7 +53,7 @@ const SignIn: React.FC = () => {
         rules={{required: true, minLength: 6}}
       />
 
-      {errorText !== null && <TagError>{errorText}</TagError>}
+      {error !== null && <TagError>{error}</TagError>}
     </Container>
   );
 };

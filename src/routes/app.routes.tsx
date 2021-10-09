@@ -25,7 +25,7 @@ const App: React.FC = () => {
         headerShown: false,
       }}
       initialRouteName="ListBooks">
-      {/* <stack.Screen name="ListBooks" component={ListBooks} /> */}
+      <stack.Screen name="ListBooks" component={ListBooks} />
       <stack.Screen name="ViewBooks" component={ViewBooks} />
     </stack.Navigator>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 
 import {Header} from '../../components/Header';
@@ -12,8 +12,11 @@ import {
   ContainerSearchInput,
   ContainerFlatListBooks,
 } from './styles';
+import {useAuth} from '../../Context/Auth/auth';
 
 function ListBooks() {
+  const {authorization} = useAuth();
+
   return (
     <Container source={background}>
       <StatusBar

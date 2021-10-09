@@ -12,6 +12,7 @@ interface InputProps extends SubmitButtonProps {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
+  loading?: boolean;
 }
 
 export function Input({
@@ -20,6 +21,7 @@ export function Input({
   showEnterButton,
   onChangeText,
   value,
+  loading,
   ...rest
 }: InputProps) {
   return (
@@ -42,7 +44,7 @@ export function Input({
           },
         }}
       />
-      {showEnterButton && <SubmitButton {...rest} />}
+      {showEnterButton && <SubmitButton {...rest} loading={loading} />}
     </Container>
   );
 }

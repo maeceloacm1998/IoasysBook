@@ -1,12 +1,11 @@
 import React from 'react';
 
-import {createStackNavigator} from '@react-navigation/stack';
-
-const stack = createStackNavigator();
+import SignIn from '../pages/SignIn';
 
 import {theme} from '../styles/theme';
 
-import SignIn from '../pages/SignIn';
+import {createStackNavigator} from '@react-navigation/stack';
+const stack = createStackNavigator();
 
 const StackRoutes: React.FC = () => {
   return (

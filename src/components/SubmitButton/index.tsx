@@ -1,14 +1,20 @@
 import React from 'react';
-import {TouchableOpacityProps} from 'react-native';
+import {ActivityIndicator, TouchableOpacityProps} from 'react-native';
+import {theme} from '../../styles/theme';
 
 import {ContainerEnterButton, EnterButton, TextEnterButton} from './styles';
 
 export interface SubmitButtonProps extends TouchableOpacityProps {
   handleSubmit?(): void;
   borderButton?: boolean;
+  loading?: boolean;
 }
 
-function SubmitButton({handleSubmit, borderButton}: SubmitButtonProps) {
+function SubmitButton({
+  handleSubmit,
+  borderButton,
+  loading,
+}: SubmitButtonProps) {
   return (
     <EnterButton
       activeOpacity={0.7}
@@ -18,7 +24,11 @@ function SubmitButton({handleSubmit, borderButton}: SubmitButtonProps) {
         }
       }}>
       <ContainerEnterButton border={borderButton ? true : false}>
-        <TextEnterButton> Entrar </TextEnterButton>
+        {loading ? (
+          <ActivityIndicator color={theme.color.author} size={20} />
+        ) : (
+          <TextEnterButton> Entrar </TextEnterButton>
+        )}
       </ContainerEnterButton>
     </EnterButton>
   );
