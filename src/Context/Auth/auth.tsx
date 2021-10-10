@@ -62,6 +62,8 @@ export const AuthProvider: React.FC = ({children}) => {
 
   useEffect(() => {
     async function regeneratedToken(userData: AuthState) {
+      setLoading(true);
+
       const responseToken: AxiosResponse = await api.post(
         'auth/refresh-token',
         {
@@ -88,6 +90,8 @@ export const AuthProvider: React.FC = ({children}) => {
       await AsyncStorage.setItem('@IOASYS:user', JSON.stringify(objectData));
 
       setData(objectData);
+
+      setLoading(false);
     }
 
     async function persistLogin() {

@@ -3,7 +3,6 @@ import React, {createContext, useContext, useState} from 'react';
 import {useAuth} from '../Auth/auth';
 import {api} from '../../services/api';
 import {AxiosResponse} from 'axios';
-import {openInEditor} from 'reactotron-react-native';
 
 interface BooksContextData {
   getAllBooks(): Promise<void>;

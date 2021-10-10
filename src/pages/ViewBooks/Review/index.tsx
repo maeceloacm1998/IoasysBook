@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {BooksData} from '../../../components/BoxSelectBook';
+
 import identifier from '../../../assets/identifier.png';
 
 import {
@@ -11,7 +13,11 @@ import {
   Review,
 } from './styles';
 
-export function ReviewComponent() {
+interface ReviewComponentProps {
+  data: BooksData;
+}
+
+export function ReviewComponent({data}: ReviewComponentProps) {
   return (
     <Container>
       <Title>RESENHA DA EDITORA</Title>
@@ -21,11 +27,7 @@ export function ReviewComponent() {
           <ContainerIdentifier>
             <Identifier source={identifier} />
           </ContainerIdentifier>
-          The subject of “design thinking” is the rage at business schools,
-          throughout corporations, and increasingly in the popular press—due in
-          large part to the work of IDEO, a leading design firm, and its
-          celebrated CEO, Tim Brown, who uses this book to show how the
-          techniques and strategies of design belong at every level of business.
+          {data.description}
         </Review>
       </ContainerReviwn>
     </Container>

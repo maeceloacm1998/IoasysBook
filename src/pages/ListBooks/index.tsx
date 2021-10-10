@@ -18,37 +18,22 @@ import {
 } from './styles';
 import {theme} from '../../styles/theme';
 
-interface BooksData {
-  id: string;
-  title: string;
-  description: string;
-  authors: string[];
-  pageCount: string;
-  category: string;
-  imageUrl: string;
-  isbn10: string;
-  isbn13: string;
-  language: string;
-  publisher: string;
-  published: string;
-}
-
 function ListBooks() {
   const {logout} = useAuth();
   const {getAllBooks, books} = useBooks();
 
-  const [loading, setLoading] = useState<boolean>(false);
-
   useEffect(() => {
+    let isCancelled = false;
+
     loadBooks();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   async function loadBooks() {
-    setLoading(true);
-
     await getAllBooks();
-
-    setLoading(false);
   }
 
   return (

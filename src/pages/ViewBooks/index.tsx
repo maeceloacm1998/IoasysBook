@@ -1,12 +1,13 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 
+import {useNavigation} from '@react-navigation/native';
+
 import {RoundedButton} from '../../components/RoundedButton';
 import {BoxShadow} from '../../components/BoxShadow';
+import {BooksData} from '../../components/BoxSelectBook';
 import Informations from './Informations';
 import {ReviewComponent} from './Review';
-
-import book from '../../assets/book.png';
 
 import {theme} from '../../styles/theme';
 
@@ -19,13 +20,17 @@ import {
   AuthorBook,
 } from './styles';
 
-export function ViewBooks() {
+export function ViewBooks({route}: any) {
+  const data: BooksData = route.params;
+
+  const navigation: any = useNavigation();
+
   return (
     <Container>
       <ContainerExitButton>
         <RoundedButton
           handleSubmit={() => {
-            console.log('Voltar');
+            navigation.navigate('ListBooks');
           }}
           name="arrow-left"
           size={18}
@@ -39,15 +44,15 @@ export function ViewBooks() {
             color={theme.color.shadow_black_light}
             width={295}
             height={411}>
-            <ImageBook source={book} />
+            <ImageBook source={{uri: data.imageUrl}} />
           </BoxShadow>
 
-          <TitleBook>Change By Design Second line exa...</TitleBook>
-          <AuthorBook>Tim Brown, Julie Zhuo, Fried Maximiilian</AuthorBook>
+          <TitleBook>{data.title}</TitleBook>
+          <AuthorBook>{data.authors + `,`}</AuthorBook>
 
-          <Informations />
+          <Informations data={data} />
 
-          <ReviewComponent />
+          <ReviewComponent data={data} />
         </ContainerAllDataBooks>
       </ScrollView>
     </Container>

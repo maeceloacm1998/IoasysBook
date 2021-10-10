@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {Keyboard, TouchableWithoutFeedback} from 'react-native';
 
 import {useForm, Controller} from 'react-hook-form';
 
@@ -20,41 +21,46 @@ const SignIn: React.FC = () => {
   }
 
   return (
-    <Container source={background}>
-      <ContainerHeader>
-        <Header colorTheme="white" />
-      </ContainerHeader>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}>
+      <Container source={background}>
+        <ContainerHeader>
+          <Header colorTheme="white" />
+        </ContainerHeader>
 
-      <Controller
-        control={control}
-        render={({field: {onChange, value}}) => (
-          <Input label="Email" onChangeText={onChange} value={value} />
-        )}
-        defaultValue=""
-        name="email"
-        rules={{required: true, minLength: 6}}
-      />
+        <Controller
+          control={control}
+          render={({field: {onChange, value}}) => (
+            <Input label="Email" onChangeText={onChange} value={value} />
+          )}
+          defaultValue=""
+          name="email"
+          rules={{required: true, minLength: 6}}
+        />
 
-      <Controller
-        control={control}
-        render={({field: {onChange, value}}) => (
-          <Input
-            label="Senha"
-            onChangeText={onChange}
-            value={value}
-            password
-            showEnterButton
-            handleSubmit={handleSubmit(onSubmit)}
-            loading={loading}
-          />
-        )}
-        defaultValue=""
-        name="password"
-        rules={{required: true, minLength: 6}}
-      />
+        <Controller
+          control={control}
+          render={({field: {onChange, value}}) => (
+            <Input
+              label="Senha"
+              onChangeText={onChange}
+              value={value}
+              password
+              showEnterButton
+              handleSubmit={handleSubmit(onSubmit)}
+              loading={loading}
+            />
+          )}
+          defaultValue=""
+          name="password"
+          rules={{required: true, minLength: 6}}
+        />
 
-      {error !== null && <TagError>{error}</TagError>}
-    </Container>
+        {error !== null && <TagError>{error}</TagError>}
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React from 'react';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-import book from '../../assets/book.png';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   ContainerBox,
@@ -13,7 +13,7 @@ import {
   SubscriptionBook,
 } from './styles';
 
-interface BoxSelectBookProps {
+export interface BoxSelectBookProps {
   data: BooksData;
 }
 
@@ -33,18 +33,26 @@ export interface BooksData {
 }
 
 export function BoxSelectBook({data}: BoxSelectBookProps) {
+  const navigation: any = useNavigation();
+
   return (
-    <ContainerBox>
-      <PricipalContainer>
-        <ImageBook source={{uri: data.imageUrl}} />
-        <ContainerAllData>
-          <TitleBook>{data.title}</TitleBook>
-          <AuthorBook>{data.authors + `,`}</AuthorBook>
-          <SubscriptionBook>{data.pageCount} páginas</SubscriptionBook>
-          <SubscriptionBook>Editora {data.publisher}</SubscriptionBook>
-          <SubscriptionBook>{data.published}</SubscriptionBook>
-        </ContainerAllData>
-      </PricipalContainer>
-    </ContainerBox>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={() => {
+        navigation.navigate('ViewBooks', data);
+      }}>
+      <ContainerBox>
+        <PricipalContainer>
+          <ImageBook source={{uri: data.imageUrl}} />
+          <ContainerAllData>
+            <TitleBook>{data.title}</TitleBook>
+            <AuthorBook>{data.authors + `,`}</AuthorBook>
+            <SubscriptionBook>{data.pageCount} páginas</SubscriptionBook>
+            <SubscriptionBook>Editora {data.publisher}</SubscriptionBook>
+            <SubscriptionBook>{data.published}</SubscriptionBook>
+          </ContainerAllData>
+        </PricipalContainer>
+      </ContainerBox>
+    </TouchableOpacity>
   );
 }

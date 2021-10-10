@@ -6,6 +6,7 @@ import {SignInProvider} from './src/Context';
 import Stack from './src/routes';
 
 export default function App() {
+  // Para utilizar o reactotron
   if (__DEV__) {
     import('./ReactotronConfig');
   }

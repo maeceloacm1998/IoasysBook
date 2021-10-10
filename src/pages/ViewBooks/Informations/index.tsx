@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {BooksData} from '../../../components/BoxSelectBook';
+
 import {
   Container,
   ContainerKeys,
@@ -9,7 +11,11 @@ import {
   TextValue,
 } from './styles';
 
-const Informations: React.FC = () => {
+interface IntormationsProps {
+  data: BooksData;
+}
+
+const Informations = ({data}: IntormationsProps) => {
   return (
     <Container>
       <ContainerKeys>
@@ -21,10 +27,10 @@ const Informations: React.FC = () => {
       </ContainerKeys>
 
       <ContainerValue>
-        <TextValue>304 páginas</TextValue>
-        <TextValue>Editora Loyola</TextValue>
-        <TextValue>2020</TextValue>
-        <TextValue>Inglês</TextValue>
+        <TextValue>{data.pageCount} páginas</TextValue>
+        <TextValue>Editora {data.publisher}</TextValue>
+        <TextValue>{data.published}</TextValue>
+        <TextValue>{data.language}</TextValue>
       </ContainerValue>
     </Container>
   );
