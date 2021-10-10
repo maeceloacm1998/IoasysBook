@@ -28,9 +28,10 @@ O projeto foi feito com react-native-cli, utilizando TypeScript e Styled-Compone
 6. Abra o emulador AVD no Android Studio.
 7. Digite `yarn android` para buildar o app.
 
+ <hr/>
+ 
 # Componentes
-
-
+ 
 ## BoxSelectBook
 - Esse componente é usado para exibir cada card da listagem de livros.
 
