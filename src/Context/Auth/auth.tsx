@@ -64,32 +64,40 @@ export const AuthProvider: React.FC = ({children}) => {
     async function regeneratedToken(userData: AuthState) {
       setLoading(true);
 
-      const responseToken: AxiosResponse = await api.post(
-        'auth/refresh-token',
-        {
-          refreshToken: userData.reflashToken,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${userData.authorization}`,
-            'refresh-token': userData.reflashToken,
+      try {
+        const responseToken: AxiosResponse = await api.post(
+          'auth/refresh-token',
+          {
+            refreshToken: userData.reflashToken,
           },
+          {
+            headers: {
+              Authorization: `Bearer ${userData.authorization}`,
+              'refresh-token': userData.reflashToken,
+            },
+          }
+        );
+
+        const reflashToken = getReflashToken(responseToken.headers);
+
+        const authorization: string = responseToken.headers.authorization;
+
+        const objectData: AuthState = {
+          authorization: authorization,
+          reflashToken: reflashToken,
+          user: userData.user,
+        };
+
+        await AsyncStorage.setItem('@IOASYS:user', JSON.stringify(objectData));
+
+        setData(objectData);
+      } catch (error) {
+        const err = error as AxiosError;
+
+        if (err.response?.status === 401) {
+          logout();
         }
-      );
-
-      const reflashToken = getReflashToken(responseToken.headers);
-
-      const authorization: string = responseToken.headers.authorization;
-
-      const objectData: AuthState = {
-        authorization: authorization,
-        reflashToken: reflashToken,
-        user: userData.user,
-      };
-
-      await AsyncStorage.setItem('@IOASYS:user', JSON.stringify(objectData));
-
-      setData(objectData);
+      }
 
       setLoading(false);
     }

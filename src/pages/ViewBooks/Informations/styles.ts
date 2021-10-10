@@ -34,6 +34,7 @@ export const TextKeys = styled.Text`
 `;
 
 export const ContainerValue = styled.View`
+  width: 75%;
   justify-content: flex-end;
   align-items: flex-end;
 `;

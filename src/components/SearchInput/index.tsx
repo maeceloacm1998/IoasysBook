@@ -3,8 +3,11 @@ import {TouchableOpacity} from 'react-native';
 
 import IconEvil from 'react-native-vector-icons/EvilIcons';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconFeather from 'react-native-vector-icons/Feather';
 
 import {ModalOptions} from '../ModalOptions';
+
+import {useBooks} from '../../Context/Books/books';
 
 import {Container, ContainerInput, TextInputCustom} from './styles';
 
@@ -14,7 +17,18 @@ interface SearchInputProps {
 }
 
 export function SearchInput({label}: SearchInputProps) {
+  const {searchBooks} = useBooks();
+
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  function handleSearchBooks(text: string) {
+    setInputValue(text);
+
+    setTimeout(() => {
+      searchBooks(text);
+    }, 1000);
+  }
 
   return (
     <Container>
@@ -24,8 +38,23 @@ export function SearchInput({label}: SearchInputProps) {
           placeholderTextColor={theme.color.border_black_light}
           selectionColor={theme.color.gray}
           autoCorrect={false}
+          value={inputValue}
+          onChangeText={text => {
+            handleSearchBooks(text);
+          }}
         />
-        <IconEvil name="search" color={theme.color.black} size={30} />
+        {inputValue !== '' ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              setInputValue('');
+              handleSearchBooks('');
+            }}>
+            <IconFeather name="x" color={theme.color.black} size={25} />
+          </TouchableOpacity>
+        ) : (
+          <IconEvil name="search" color={theme.color.black} size={30} />
+        )}
       </ContainerInput>
 
       <TouchableOpacity

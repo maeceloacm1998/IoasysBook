@@ -1,11 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, StatusBar} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 
 import {Header} from '../../components/Header';
 import {SearchInput} from '../../components/SearchInput';
-import {BoxSelectBook} from '../../components/BoxSelectBook';
+import {BoxSelectBookComponent} from '../../components/BoxSelectBook';
 
 import background from '../../assets/background_listbooks.png';
+import not_found from '../../assets/not_found.png';
 
 import {useAuth} from '../../Context/Auth/auth';
 import {useBooks} from '../../Context/Books/books';
@@ -20,64 +27,64 @@ import {theme} from '../../styles/theme';
 
 function ListBooks() {
   const {logout} = useAuth();
-  const {getAllBooks, books} = useBooks();
+  const {getAllBooks, books, filterBooks, notFound, loading} = useBooks();
 
   useEffect(() => {
-    let isCancelled = false;
-
     loadBooks();
-
-    return () => {
-      isCancelled = true;
-    };
   }, []);
 
   async function loadBooks() {
-    await getAllBooks();
+    if (books.length >= 8 || books.length === 0) {
+      await getAllBooks();
+    }
   }
 
   return (
-    <Container source={background}>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor="transparent"
-        translucent
-      />
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}>
+      <Container source={background}>
+        <Header
+          showButtonExit
+          handleSubmit={() => {
+            logout();
+          }}
+        />
 
-      <Header
-        showButtonExit
-        handleSubmit={() => {
-          logout();
-        }}
-      />
+        <ContainerSearchInput>
+          <SearchInput label="Procure um livro" />
+        </ContainerSearchInput>
 
-      <ContainerSearchInput>
-        <SearchInput label="Procure um livro" />
-      </ContainerSearchInput>
-
-      <FlatList
-        data={books}
-        renderItem={({item}) => (
-          <ContainerFlatListBooks>
-            <BoxSelectBook data={item} />
-          </ContainerFlatListBooks>
+        {loading && books.length === 0 ? (
+          <ContainerAlignCenter>
+            <ActivityIndicator color={theme.color.author} size={20} />
+          </ContainerAlignCenter>
+        ) : notFound ? (
+          <ContainerAlignCenter>
+            <Image source={not_found} />
+          </ContainerAlignCenter>
+        ) : (
+          <FlatList
+            data={filterBooks?.length === 0 ? books : filterBooks}
+            renderItem={({item}) => (
+              <ContainerFlatListBooks>
+                <BoxSelectBookComponent data={item} />
+              </ContainerFlatListBooks>
+            )}
+            initialNumToRender={3}
+            onEndReached={loadBooks}
+            onEndReachedThreshold={0.5}
+            showsVerticalScrollIndicator={false}
+            ListFooterComponent={
+              <ContainerAlignCenter>
+                <ActivityIndicator color={theme.color.author} size={20} />
+              </ContainerAlignCenter>
+            }
+          />
         )}
-        initialNumToRender={3}
-        onEndReached={loadBooks}
-        onEndReachedThreshold={0.5}
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={
-          <ContainerAlignCenter>
-            <ActivityIndicator color={theme.color.author} size={20} />
-          </ContainerAlignCenter>
-        }
-        ListEmptyComponent={
-          <ContainerAlignCenter>
-            <ActivityIndicator color={theme.color.author} size={20} />
-          </ContainerAlignCenter>
-        }
-      />
-    </Container>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
 

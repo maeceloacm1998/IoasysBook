@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import {useNavigation} from '@react-navigation/native';
@@ -32,7 +32,7 @@ export interface BooksData {
   published: string;
 }
 
-export function BoxSelectBook({data}: BoxSelectBookProps) {
+function BoxSelectBook({data}: BoxSelectBookProps) {
   const navigation: any = useNavigation();
 
   return (
@@ -56,3 +56,10 @@ export function BoxSelectBook({data}: BoxSelectBookProps) {
     </TouchableOpacity>
   );
 }
+
+export const BoxSelectBookComponent = memo(
+  BoxSelectBook,
+  (prevProps, nextProps) => {
+    return Object.is(prevProps.data, nextProps.data);
+  }
+);

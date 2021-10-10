@@ -28,7 +28,12 @@ const Informations = ({data}: IntormationsProps) => {
 
       <ContainerValue>
         <TextValue>{data.pageCount} páginas</TextValue>
-        <TextValue>Editora {data.publisher}</TextValue>
+        <TextValue>
+          Editora{' '}
+          {data.publisher.length > 20
+            ? data.publisher.substring(10) + '...'
+            : data.publisher}
+        </TextValue>
         <TextValue>{data.published}</TextValue>
         <TextValue>{data.language}</TextValue>
       </ContainerValue>
