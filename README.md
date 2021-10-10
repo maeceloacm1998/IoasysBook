@@ -12,7 +12,7 @@ O projeto foi feito com react-native-cli, utilizando TypeScript e Styled-Compone
 - React-Native CLI
 - TypeScript
 - Eslint
-- Prettier
+- Code Formatter - Prettier
 - Styled-Components
 - React-hook-form
 - React-Native-Paper
