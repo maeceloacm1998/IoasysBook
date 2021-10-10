@@ -11,7 +11,7 @@ import {
   Review,
 } from './styles';
 
-export function Reviwn() {
+export function ReviewComponent() {
   return (
     <Container>
       <Title>RESENHA DA EDITORA</Title>

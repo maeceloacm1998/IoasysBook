@@ -18,3 +18,10 @@ export const ContainerFlatListBooks = styled.View`
   margin-top: 10px;
   width: 100%;
 `;
+
+export const ContainerAlignCenter = styled.View`
+  flex: 1;
+
+  justify-content: center;
+  align-items: center;
+`;

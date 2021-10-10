@@ -27,7 +27,7 @@ function SubmitButton({
         {loading ? (
           <ActivityIndicator color={theme.color.author} size={20} />
         ) : (
-          <TextEnterButton> Entrar </TextEnterButton>
+          <TextEnterButton> Filtrar </TextEnterButton>
         )}
       </ContainerEnterButton>
     </EnterButton>

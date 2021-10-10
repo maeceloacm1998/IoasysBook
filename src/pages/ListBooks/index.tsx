@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, StatusBar} from 'react-native';
+import {ActivityIndicator, FlatList, StatusBar} from 'react-native';
 
 import {Header} from '../../components/Header';
 import {SearchInput} from '../../components/SearchInput';
@@ -7,19 +7,16 @@ import {BoxSelectBook} from '../../components/BoxSelectBook';
 
 import background from '../../assets/background_listbooks.png';
 
-import {api} from '../../services/api';
-import {AxiosResponse} from 'axios';
 import {useAuth} from '../../Context/Auth/auth';
+import {useBooks} from '../../Context/Books/books';
 
 import {
   Container,
   ContainerSearchInput,
   ContainerFlatListBooks,
+  ContainerAlignCenter,
 } from './styles';
-
-interface ListBooksProps {
-  data: BooksData;
-}
+import {theme} from '../../styles/theme';
 
 interface BooksData {
   id: string;
@@ -37,34 +34,21 @@ interface BooksData {
 }
 
 function ListBooks() {
-  const {authorization, logout} = useAuth();
+  const {logout} = useAuth();
+  const {getAllBooks, books} = useBooks();
 
-  const [itemBooks, setItemBooks] = useState<BooksData[]>([]);
-  const [totalBooks, setTotalBooks] = useState<number>(0);
-  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     loadBooks();
   }, []);
 
   async function loadBooks() {
-    if (itemBooks.length < totalBooks) {
-      const responseBooks: AxiosResponse = await api.get(
-        `books?page=${page}&amount=10&category=biographies`,
-        {
-          headers: {
-            Authorization: `Bearer ${authorization}`,
-          },
-        }
-      );
+    setLoading(true);
 
-      const {data, totalItems} = responseBooks.data;
+    await getAllBooks();
 
-      setItemBooks(oldValue => [...oldValue, ...data]);
-
-      setPage(oldValue => oldValue + 1);
-      setTotalBooks(totalItems);
-    }
+    setLoading(false);
   }
 
   return (
@@ -87,14 +71,26 @@ function ListBooks() {
       </ContainerSearchInput>
 
       <FlatList
-        data={itemBooks}
+        data={books}
         renderItem={({item}) => (
           <ContainerFlatListBooks>
             <BoxSelectBook data={item} />
           </ContainerFlatListBooks>
         )}
+        initialNumToRender={3}
         onEndReached={loadBooks}
-        onEndReachedThreshold={0.3}
+        onEndReachedThreshold={0.5}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={
+          <ContainerAlignCenter>
+            <ActivityIndicator color={theme.color.author} size={20} />
+          </ContainerAlignCenter>
+        }
+        ListEmptyComponent={
+          <ContainerAlignCenter>
+            <ActivityIndicator color={theme.color.author} size={20} />
+          </ContainerAlignCenter>
+        }
       />
     </Container>
   );

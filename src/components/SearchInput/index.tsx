@@ -1,18 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 
 import IconEvil from 'react-native-vector-icons/EvilIcons';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import {theme} from '../../styles/theme';
+
 import {ModalOptions} from '../ModalOptions';
 
 import {Container, ContainerInput, TextInputCustom} from './styles';
 
+import {theme} from '../../styles/theme';
 interface SearchInputProps {
   label: string;
 }
 
 export function SearchInput({label}: SearchInputProps) {
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   return (
     <Container>
       <ContainerInput>
@@ -25,7 +28,11 @@ export function SearchInput({label}: SearchInputProps) {
         <IconEvil name="search" color={theme.color.black} size={30} />
       </ContainerInput>
 
-      <TouchableOpacity activeOpacity={0.5}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => {
+          setShowModal(true);
+        }}>
         <IconIonicons
           name="options-outline"
           size={30}
@@ -33,10 +40,10 @@ export function SearchInput({label}: SearchInputProps) {
         />
 
         <ModalOptions
-          handleSubmit={() => {
-            console.log('dale dale');
+          visible={showModal}
+          handleExitModal={() => {
+            setShowModal(false);
           }}
-          handleExitModal={false}
         />
       </TouchableOpacity>
     </Container>

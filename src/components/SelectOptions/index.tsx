@@ -3,9 +3,14 @@ import {TouchableOpacity} from 'react-native';
 
 export interface SelectOptionProps {
   title?: string;
-  arrayOptions?: string[];
-  arrayItemSelected?: string[];
-  itemSelected?: (item: string) => void;
+  arrayOptions?: ArrayOptionsProps[];
+  arrayItemSelected?: ArrayOptionsProps[];
+  itemSelected?: (item: ArrayOptionsProps) => void;
+}
+
+export interface ArrayOptionsProps {
+  type: string;
+  value: string;
 }
 
 import {
@@ -27,7 +32,12 @@ export function SelectOptions({
       <Title>{title}</Title>
       <ContainerAllOptions>
         {arrayOptions !== undefined &&
+          arrayItemSelected !== undefined &&
           arrayOptions.map((item, index) => {
+            const map = arrayItemSelected.findIndex(option => {
+              return option.value === item.value;
+            });
+
             return (
               <TouchableOpacity
                 activeOpacity={0.7}
@@ -36,9 +46,13 @@ export function SelectOptions({
                     itemSelected(item);
                   }
                 }}
-                key={item}>
-                <Option key={item}>
-                  <TextOption key={item}>{item}</TextOption>
+                key={item.value}>
+                <Option key={item.value} activity={map !== -1 ? true : false}>
+                  <TextOption
+                    key={item.value}
+                    activity={map !== -1 ? true : false}>
+                    {item.value}
+                  </TextOption>
                 </Option>
               </TouchableOpacity>
             );

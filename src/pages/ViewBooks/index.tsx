@@ -4,7 +4,7 @@ import {ScrollView} from 'react-native';
 import {RoundedButton} from '../../components/RoundedButton';
 import {BoxShadow} from '../../components/BoxShadow';
 import Informations from './Informations';
-import {Reviwn} from './Reviwn';
+import {ReviewComponent} from './Review';
 
 import book from '../../assets/book.png';
 
@@ -47,7 +47,7 @@ export function ViewBooks() {
 
           <Informations />
 
-          <Reviwn />
+          <ReviewComponent />
         </ContainerAllDataBooks>
       </ScrollView>
     </Container>
