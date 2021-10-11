@@ -3,7 +3,7 @@
 > Biblioteca de livros da empresa Ioasys.
 
 <!-- Descrição -->
-Esse projeto foi feito para a entrevista da empresa Ioasys, utilizando React-Native cli, styled-component, TypeScript, Eslit, Prettier, ContextAPI, etc...
+Esse projeto foi feito para a entrevista da empresa Ioasys, utilizando React-Native cli, styled-component, TypeScript, Eslint, Prettier, ContextAPI, etc...
 Foram utilizadas algumas bibliotecas que auxiliaram no controle de dados e no front-end, como o component "TextInputFlat", usado na tela de login, na qual fornece a animação após o clique. Além disso, a lib "React-Native-Hook-forms" foi utilzada para controlar os dados recebidos no input da tela de login, pois ela entrega ótima perfomace e praticidade.
 
  
