@@ -3,17 +3,18 @@
 > Biblioteca de livros da empresa Ioasys.
 
 <!-- Descrição -->
-O projeto foi feito com react-native-cli, utilizando TypeScript e Styled-Component.
-#### [![LinkedIn][linkedin-shield]][linkedin-url1]
+Esse projeto foi feito para a entrevista da empresa Ioasys, utilizando React-Native cli, styled-component, TypeScript, Eslit, Prettier, ContextAPI, etc...
+Foram utilizadas algumas bibliotecas que auxiliaram no controle de dados e no front-end, como o component "TextInputFlat", usado na tela de login, na qual fornece a animação após o clique. Além disso, a lib "React-Native-Hook-forms" foi utilzada para controlar os dados recebidos no input da tela de login, pois ela entrega ótima perfomace e praticidade.
+
  
 <!-- Tecnologias utilizadas -->
 ## 🏗 Tecnologias utilizadas & Dependências
-
 - React-Native CLI
 - TypeScript
 - Eslint
 - Code Formatter - Prettier
 - Styled-Components
+- ContextAPI
 - React-hook-form
 - React-Native-Paper
 - React-Native-Neomorph-Shadows ( biblioteca para sombra )
@@ -140,13 +141,20 @@ O projeto foi feito com react-native-cli, utilizando TypeScript e Styled-Compone
 |   `loading`                   | `boolean`                   |  not required                |  Caso passe true, aparece um spinner no lugar do text do botão.
 |  `handleSubmit()`           | `()  => void`               |  not required                |  Função responsavel por realizar a ação do botão.
 
+ 
+<hr/>
+ 
+ ### Exemplos
+ 
+  ![Basic Exemple](https://media.giphy.com/media/5NG1nqQBfyk8KqFUeN/giphy.gif)
+  ![Basic NorFound](https://media.giphy.com/media/hTPWwcuoTq9moQXsNg/giphy.gif)
+  ![Basic listagem](https://media.giphy.com/media/TZ49d4lmLv0ciuNZkK/giphy.gif)
 
-                        
-
-
-  
+<hr/>
+ 
 # Créditos
 - Aplicação desenvolvida por Marcelo Antônio.
+ #### [![LinkedIn][linkedin-shield]][linkedin-url1]
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
