@@ -1,17 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
-import {createStackNavigator} from '@react-navigation/stack';
-
-const stack = createStackNavigator();
+import SignIn from '../pages/SignIn';
 
 import {theme} from '../styles/theme';
 
-import SignIn from '../pages/SignIn';
+import {createStackNavigator} from '@react-navigation/stack';
+const stack = createStackNavigator();
 
 const StackRoutes: React.FC = () => {
   return (
     <stack.Navigator
       screenOptions={{
+        headerShown: false,
         cardStyle: {
           backgroundColor: theme.color.white,
         },

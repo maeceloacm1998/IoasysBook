@@ -1,9 +1,19 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {} from 'react-native';
+
+import {SignInProvider} from './src/Context';
 
 import Stack from './src/routes';
 
 export default function App() {
-  return <Stack />;
+  // Para utilizar o reactotron
+  if (__DEV__) {
+    import('./ReactotronConfig');
+  }
+
+  return (
+    <SignInProvider>
+      <Stack />
+    </SignInProvider>
+  );
 }
