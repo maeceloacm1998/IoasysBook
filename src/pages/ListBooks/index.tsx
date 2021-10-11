@@ -30,7 +30,19 @@ function ListBooks() {
   const {getAllBooks, books, filterBooks, notFound, loading} = useBooks();
 
   useEffect(() => {
-    loadBooks();
+    function renderBooks() {
+      let isMounted = true;
+
+      if (isMounted) {
+        loadBooks();
+      }
+
+      return () => {
+        isMounted = false;
+      };
+    }
+
+    renderBooks();
   }, []);
 
   async function loadBooks() {
