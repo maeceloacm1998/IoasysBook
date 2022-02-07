@@ -1,7 +1,7 @@
 import React from 'react';
 import {Keyboard, TouchableWithoutFeedback} from 'react-native';
 
-import {useForm, Controller} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import {Header} from '../../components/Header';
 import {Input} from '../../components/Input';
@@ -33,32 +33,16 @@ const SignIn: React.FC = () => {
           <Header colorTheme="white" />
         </ContainerHeader>
 
-        <Controller
-          control={control}
-          render={({field: {onChange, value}}) => (
-            <Input label="Email" onChangeText={onChange} value={value} />
-          )}
-          defaultValue=""
-          name="email"
-          rules={{required: true, minLength: 6}}
-        />
+        <Input label="Email" control={control} name="email" />
 
-        <Controller
+        <Input
           control={control}
-          render={({field: {onChange, value}}) => (
-            <Input
-              label="Senha"
-              secureTextEntry={true}
-              onChangeText={onChange}
-              value={value}
-              showEnterButton
-              handleSubmit={handleSubmit(onSubmit)}
-              loading={loading}
-            />
-          )}
-          defaultValue=""
+          label="Senha"
+          secureTextEntry={true}
+          showEnterButton
+          handleSubmit={handleSubmit(onSubmit)}
+          loading={loading}
           name="password"
-          rules={{required: true, minLength: 6}}
         />
 
         {error !== null && <TagError>{error}</TagError>}
