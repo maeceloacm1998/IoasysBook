@@ -1,26 +1,24 @@
 import React from 'react';
+import {TextInputProps} from 'react-native';
 
-import SubmitButton, {SubmitButtonProps} from '../SubmitButton';
+import SubmitButton from '../SubmitButton';
 
 import {theme} from '../../styles/theme';
 
 import {Container, InputFlat} from './styles';
 
-interface InputProps extends SubmitButtonProps {
-  password?: boolean;
+interface InputProps extends TextInputProps {
   showEnterButton?: boolean;
   label: string;
-  value: string;
-  onChangeText: (text: string) => void;
+  theme?: any;
   loading?: boolean;
+  handleSubmit?(): void;
 }
 
 export function Input({
   label,
-  password,
   showEnterButton,
-  onChangeText,
-  value,
+  handleSubmit,
   loading,
   ...rest
 }: InputProps) {
@@ -30,12 +28,7 @@ export function Input({
         label={label}
         mode="flat"
         autoCorrect={false}
-        secureTextEntry={password ? true : false}
         style={{width: showEnterButton ? '70%' : '100%'}}
-        onChangeText={text => {
-          onChangeText(text);
-        }}
-        value={value}
         theme={{
           colors: {
             primary: theme.color.white,
@@ -43,8 +36,11 @@ export function Input({
             placeholder: theme.color.white,
           },
         }}
+        {...rest}
       />
-      {showEnterButton && <SubmitButton {...rest} loading={loading} />}
+      {showEnterButton && (
+        <SubmitButton handleSubmit={handleSubmit} loading={loading} />
+      )}
     </Container>
   );
 }

@@ -5,7 +5,7 @@ import {api} from '../../services/api';
 import {AxiosError, AxiosResponse} from 'axios';
 
 interface AuthContextData {
-  login(credentials: SignInCredencials): Promise<void>;
+  login(credentials: SignInCredentials): Promise<void>;
   logout(): void;
   error: string | null;
   loading: boolean;
@@ -14,7 +14,7 @@ interface AuthContextData {
   reflashToken: string | null;
 }
 
-export interface SignInCredencials {
+export interface SignInCredentials {
   email: string;
   password: string;
 }
@@ -113,7 +113,7 @@ export const AuthProvider: React.FC = ({children}) => {
     persistLogin();
   }, []);
 
-  const login = async (users: SignInCredencials) => {
+  const login = async (users: SignInCredentials) => {
     setErrorText(null);
 
     try {

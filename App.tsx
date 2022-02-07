@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 
-import {SignInProvider} from './src/Context';
+import {SignInProvider} from './src/presentation/Context';
 
-import Stack from './src/routes';
+import Stack from './src/presentation/routes';
 
 export default function App() {
   // Para utilizar o reactotron

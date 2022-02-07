@@ -8,7 +8,10 @@ import {Input} from '../../components/Input';
 
 import background from '../../assets/background_login.png';
 
-import {useAuth, SignInCredencials} from '../../Context/Auth/auth';
+import {
+  useAuth,
+  SignInCredentials as SignInCredentials,
+} from '../../Context/Auth/auth';
 
 import {Container, ContainerHeader, TagError} from './styles';
 
@@ -16,7 +19,7 @@ const SignIn: React.FC = () => {
   const {control, handleSubmit} = useForm();
   const {error, login, loading} = useAuth();
 
-  async function onSubmit(data: SignInCredencials) {
+  async function onSubmit(data: SignInCredentials) {
     login(data);
   }
 
@@ -45,9 +48,9 @@ const SignIn: React.FC = () => {
           render={({field: {onChange, value}}) => (
             <Input
               label="Senha"
+              secureTextEntry={true}
               onChangeText={onChange}
               value={value}
-              password
               showEnterButton
               handleSubmit={handleSubmit(onSubmit)}
               loading={loading}
