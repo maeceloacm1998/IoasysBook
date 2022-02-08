@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AsyncStorage} from 'react-native';
 
 import {api} from '../../services/api';
 import {AxiosError, AxiosResponse} from 'axios';
