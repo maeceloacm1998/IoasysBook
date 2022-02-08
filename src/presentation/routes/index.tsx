@@ -35,7 +35,7 @@ const Routes: React.FC = () => {
             translucent
           />
         )}
-        {authorization === '' ? <AuthRoutes /> : <AppRoutes />}
+        {!authorization ? <AuthRoutes /> : <AppRoutes />}
       </NavigationContainer>
     );
   }

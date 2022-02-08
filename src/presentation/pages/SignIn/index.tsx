@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Keyboard, TouchableWithoutFeedback} from 'react-native';
 
 import {useForm} from 'react-hook-form';
@@ -20,7 +20,7 @@ const SignIn: React.FC = () => {
   const {error, login, loading} = useAuth();
 
   async function onSubmit(data: SignInCredentials) {
-    login(data);
+    await login(data);
   }
 
   return (
