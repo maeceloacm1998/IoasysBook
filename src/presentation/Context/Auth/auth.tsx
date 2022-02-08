@@ -5,13 +5,19 @@ import {api} from '../../services/api';
 import {AxiosError, AxiosResponse} from 'axios';
 
 interface AuthContextData {
-  login(credentials: SignInCredentials): Promise<void>;
+  login(credentials: SignInCredentials): Promise<StatusReturn>;
   logout(): void;
   error: string | null;
   loading: boolean;
   user: User;
   authorization: string | null;
   reflashToken: string | null;
+}
+
+interface StatusReturn {
+  status: number | undefined;
+  body: any;
+  message: string;
 }
 
 export interface SignInCredentials {
@@ -41,22 +47,10 @@ interface MessageErrorType {
   message: string;
 }
 
-const DEFAULT_VALUE: AuthState = {
-  authorization: '',
-  reflashToken: '',
-  user: {
-    email: '',
-    birthdate: '',
-    gender: '',
-    id: '',
-    name: '',
-  },
-};
-
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({children}) => {
-  const [data, setData] = useState<AuthState>(DEFAULT_VALUE);
+  const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorText, setErrorText] = useState<string | null>(null);
 
@@ -113,47 +107,47 @@ export const AuthProvider: React.FC = ({children}) => {
     persistLogin();
   }, []);
 
-  const login = async (users: SignInCredentials) => {
+  /**
+   * Function used to receive user login data
+   * @param users {email and password}
+   * @returns return status code, body and message error or success.
+   */
+  const login = async (users: SignInCredentials): Promise<StatusReturn> => {
     setErrorText(null);
 
     try {
       setLoading(true);
-      const response: AxiosResponse = await api.post('auth/sign-in', {
+      const {data, headers}: AxiosResponse = await api.post('auth/sign-in', {
         email: users.email,
         password: users.password,
       });
 
-      const reflashToken = getReflashToken(response.headers);
-
-      const {birthdate, email, gender, id, name}: User = response.data;
-
-      const authorization: string = response.headers.authorization;
-
+      const reflashToken = getReflashToken(headers);
+      const authorization: string = headers.authorization;
       const objectData: AuthState = {
-        authorization: authorization,
-        reflashToken: reflashToken,
-        user: {
-          email: email,
-          birthdate: birthdate,
-          gender: gender,
-          id: id,
-          name: name,
-        },
+        authorization,
+        reflashToken,
+        user: data,
       };
 
       await AsyncStorage.setItem('@IOASYS:user', JSON.stringify(objectData));
-
       setData(objectData);
+
+      return {
+        status: 201,
+        body: objectData,
+        message: 'Success!',
+      };
     } catch (error) {
       const err = error as AxiosError;
-      hadleError(err);
+      return hadleError(err);
     } finally {
       setLoading(false);
     }
   };
 
   function logout() {
-    setData(DEFAULT_VALUE);
+    setData({} as AuthState);
 
     AsyncStorage.clear();
   }
@@ -168,12 +162,17 @@ export const AuthProvider: React.FC = ({children}) => {
     return tokenValue[0][1];
   }
 
-  function hadleError(error: AxiosError): void {
-    if (error.response?.status) {
-      const err: ErrorType = error.response.data;
+  function hadleError(error: AxiosError): StatusReturn {
+    let err: ErrorType = {} as ErrorType;
 
-      setErrorText(err.errors.message);
-    }
+    if (error.response?.status) err = error.response.data;
+
+    setErrorText(err.errors.message);
+    return {
+      message: err.errors.message,
+      status: error.response?.status,
+      body: {},
+    };
   }
 
   return (
